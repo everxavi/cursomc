@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.evertonxavier.cursomc.domain.Categoria;
+import com.evertonxavier.cursomc.dto.CategoriaDTO;
 import com.evertonxavier.cursomc.repositories.CategoriaRepository;
 import com.evertonxavier.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -54,6 +55,10 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linePerPage, String orderBy, String direct){
 		PageRequest pageRequest = PageRequest.of(page, linePerPage, Direction.valueOf(direct), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 	
 }
